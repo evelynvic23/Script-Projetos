@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criando Elementos</title>
+</head>
+<body>
+    <div>
+        <form id="tecl1"> </form>
+        <br>
+        <form id="tecl2"> </form>
+        <br>
+        <form id="tecl3"> </form>
+    </div>
+    <br>
+    <p id="pre"> </p>
+    <p id="sol"> </p>
+
+    <script>
+        var cLetras1=['Q','W','E','R','T','Y','U','I','O','P'];
+        var cLetras2=['A','S','D','F','G','H','J','K','L','Ç'];
+        var cLetras3=['Z', 'X', 'C', 'V', 'B', 'N', 'M', '-'];
+
+        cria(cLetras1, "tecl1");
+        cria(cLetras2, "tecl2");
+        cria(cLetras3, "tecl3");
+
+        function cria(Letra, Tecla){
+            var Linha = document.getElementById(Tecla);
+            for(var i=0; i<Letra.length;i++){
+                var btnLetra = document.createElement("input");
+                btnLetra.setAttribute("type", "button");
+                btnLetra.setAttribute("id", Letra[i]);
+                btnLetra.setAttribute("value", Letra[i]);
+                Linha.appendChild(btnLetra);
+
+                // Necessário criar os Listeners depois de criado o objeto
+
+                //var: ela pode corresponder ao escopo global e local
+                //let: ela pode corresponder ao escopa global, local e bloco. E é isso que interessa agora. Neste caso ela só vai existir dentro destas {} e por isso conseguimos deixar as atribuições unicas.
+
+                let btn = document.getElementById(Letra[i]);
+                var cLetra = Letra[i];
+                console.log("Letra: " + cLetra);
+                btn.addEventListener("mousedown", function(){aperta(btn)});
+                btn.addEventListener("mouseup", function(){solta(btn)});
+            }
+        }
+
+
+        function aperta(bt){
+            console.log(bt);
+            document.getElementById("pre").innerHTML = "Você pressionou o botão "+ bt.value;
+        }
+
+        function solta(lt){
+            console.log(lt);
+            document.getElementById("sol").innerHTML = "Você soltou o botão " + lt.value;
+        }
+        
+    </script>
+</body>
+</html>
